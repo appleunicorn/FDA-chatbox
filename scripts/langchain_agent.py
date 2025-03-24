@@ -7,10 +7,14 @@ import os
 
 import os
 import streamlit as st
-os.environ["OPENAI_API_KEY"] = st.secrets["openai_key"]
+open_api_key = st.secrets["OPENAI_API_KEY"]
 
 def create_sqlite_agent(db_path="fda_first_generic_approvals.db"):
-    llm = ChatOpenAI(temperature=0, model="gpt-3.5-turbo") # type: ignore
+    llm = ChatOpenAI(
+        temperature=0, 
+        model="gpt-3.5-turbo",
+        openai_api_key=open_api_key
+        ) # uses streamlit secrets to get open api key
     db_uri = f"sqlite:///{db_path}"
     db = SQLDatabase.from_uri(db_uri)
 
