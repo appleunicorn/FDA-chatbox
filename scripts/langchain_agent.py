@@ -23,7 +23,7 @@ def create_sqlite_agent(db_path="fda_first_generic_approvals.db"):
         toolkit=toolkit,
         verbose=True,
         agent_type="openai-functions",  # or "chat-zero-shot-react-description" # type: ignore
-        handle_parsing_errors=True
+        handle_parsing_errors=True,
         system_message = AGENT_SYSTEM_PROMPT
     )
     return agent_executor
