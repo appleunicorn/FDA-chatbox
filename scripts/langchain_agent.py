@@ -4,7 +4,7 @@ from langchain_community.agent_toolkits.sql.base import SQLDatabaseToolkit as Co
 from langchain.sql_database import SQLDatabase
 from langchain.chat_models import ChatOpenAI
 import os
-from utils.prompts import AGENT_SYSTEM_PROMPT
+from scripts.utils.prompts import AGENT_SYSTEM_PROMPT
 import streamlit as st
 open_api_key = st.secrets["OPENAI_API_KEY"]
 
