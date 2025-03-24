@@ -12,10 +12,53 @@ import sqlite3
 st.set_page_config(page_title="FDA GPT Explorer", layout="wide")
 st.title("💬 FDA First Generic Approvals Q&A")
 
+# --- Landing Page Info ---
+st.markdown("""
+Welcome to **FDA First Generic Approvals GPT Explorer** 🎉
+
+This web app allows you to explore trends in first-time generic drug approvals by the U.S. Food and Drug Administration (FDA). It is powered by an interactive natural language agent using OpenAI and LangChain.
+
+---
+
+### 🧬 **About the Database**
+This dataset contains yearly records of **first generic ANDA (Abbreviated New Drug Application) approvals** from the FDA. First generics are the first version of a brand-name drug to be approved, marking the beginning of market competition.
+
+- **Data source**: [FDA First Generics](https://www.fda.gov/drugs/drug-approvals-and-databases/first-generic-drug-approvals)  
+- **Data format**: CSV files downloaded from the FDA website  
+- **Data fields**: ANDA number, generic and brand name, applicant, approval date, indication, etc.
+
+---
+
+### 🎯 **Purpose of this Web App**
+This app helps users:
+- Analyze trends in generic approvals over time
+- Explore top applicants in each year or across year ranges
+- Interact with the database using **natural language questions**
+- Generate dynamic visualizations on demand
+
+---
+
+### 💡 **Try Asking Questions Like:**
+- *"What is the trend of ANDA approvals over the last 5 years?"*
+- *"Which company had the most first generics approved in 2023?"*
+- *"How many first generic applicants were there in 2020?"*
+- *"Show a chart of approvals by year."*
+- *"What are the top 20 generic applicants from 2020 to 2024?"*
+
+---
+
+### 📬 **Contact Me**
+Created by **Autumn Qiu**  
+📧 Email: autumn.qiut@gmail.com  
+🌐 GitHub: [appleunicorn](https://github.com/appleunicorn)
+
+---
+""")
+
+# --- Q&A Section ---
 DB_PATH = "fda_first_generic_approvals.db"
 agent = create_sqlite_agent(db_path=DB_PATH)
 
-# --- User Input ---
 question = st.text_input("Ask a question about the FDA approval data:")
 
 if question:
