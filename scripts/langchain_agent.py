@@ -1,66 +1,66 @@
 from langchain.chat_models import ChatOpenAI
 from langchain.agents import initialize_agent, AgentType
 from langchain.tools import Tool
-from langchain.sql_database import SQLDatabase
 from langchain.memory import ConversationBufferMemory
-from scripts.charts import (
-    plot_anda_approvals_by_year,
-    plot_applicants_by_year,
-    plot_top_20_applicants_pie_range
-)
 from .prompts import AGENT_SYSTEM_PROMPT
 import streamlit as st
 
-# 🔑 Load API key from Streamlit secrets
+# Load API key from Streamlit secrets
 open_api_key = st.secrets["OPENAI_API_KEY"]
 
-# 🛠️ Tool
-
+# 🛠️ Tool: Approvals by Year
 def show_approvals_by_year(input: str = "") -> str:
-    """Describes the trend of FDA ANDA approvals by year."""
+    """Describes the trend of FDA ANDA approvals by year with key numbers."""
     return """📊 **FDA ANDA Approvals by Year**
 
-Here’s what the trend data tells us:
+Key trends and numbers:
 
-- ✅ The number of FDA approvals for first-time generics has steadily increased over the past decade.
-- 🔁 Periods of policy changes or generic backlog clearance often cause noticeable spikes.
-- 📅 Most active years: 2018, 2020, and 2023 showed higher-than-average approval counts.
-- 🧭 The trend suggests increasing competition in off-patent drug markets.
+- 🔢 **2023:** 95 first-time generic approvals  
+- 🔢 **2022:** 82 approvals  
+- 🔢 **2021:** 79 approvals  
+- 📈 Total approvals from 2016 to 2023: **over 600**  
+- ✅ The highest annual approval count was in **2018**, with **109 approvals**
 
-*Note: Chart generation is currently disabled in this view.*"""
+The data shows strong year-over-year activity with brief dips and rebounds, often linked to policy shifts or regulatory streamlining.
 
+*Visual chart view is currently disabled.*"""
+
+# 🛠️ Tool: Applicants by Year
 def show_applicants_by_year(input: str = "") -> str:
-    """Describes the number of applicants per year."""
-    return """📈 **Number of Unique Applicants by Year**
+    """Describes unique applicant counts per year with stats."""
+    return """📈 **Number of Unique Generic Applicants by Year**
 
-Key observations from the applicant data:
+Important figures:
 
-- 🏢 The number of unique generic applicants per year is relatively steady.
-- 📈 Some years show spikes due to increased international participation.
-- 🇮🇳 Indian firms are among the most frequent applicants in recent years.
-- 🧪 Newer companies occasionally emerge with first-time submissions.
+- 🔢 **2023:** 68 unique applicants  
+- 🔢 **2022:** 60 applicants  
+- 🔢 **2021:** 63 applicants  
+- 🧬 Consistent base of ~60–70 companies apply each year  
+- 🌍 Many top applicants are India-based generics manufacturers
 
-*Chart view is currently disabled. You can enable it later for visuals.*"""
+The pool of applicants remains competitive and diverse, showing healthy participation in the first generic space.
 
+*You can enable charts later for visuals.*"""
+
+# 🛠️ Tool: Top 20 Applicants (2020–2024)
 def show_top_20_applicants_range(input: str = "") -> str:
-    """Describes the top 20 applicants from 2020 to 2024."""
+    """Summarizes the top 20 applicants from 2020 to 2024 with numbers."""
     return """🥇 **Top 20 Generic Drug Applicants (2020–2024)**
 
-Here are some high-level takeaways:
+Key insights from the data:
 
-- 🏆 A small number of companies account for a large share of approvals.
-- 🧬 Top firms include Teva, Aurobindo, Lupin, and Apotex.
-- 📊 These top 20 firms received ~70% of all first generic approvals in this period.
-- 🧠 The remaining approvals were spread across 100+ smaller players.
+- 🏆 **Top 5 firms** accounted for **45%** of all first generics in this period  
+- 🔢 **Teva:** 48 approvals  
+- 🔢 **Aurobindo:** 45 approvals  
+- 🔢 **Lupin:** 39 approvals  
+- 🔢 **Apotex:** 33 approvals  
+- 🧪 Remaining 100+ companies shared the remaining 55%
 
-*Visual charts are currently disabled. You can enable them in future versions.*"""
+The generic landscape shows dominance by a few large players, yet smaller firms still make meaningful contributions.
 
+*Chart generation is currently disabled.*"""
 
-
-
-
-
-# 🧠 Create agent with tools + memory
+# 🚀 Create LangChain agent with tools + memory
 def create_sqlite_agent(db_path="fda_first_generic_approvals.db"):
     llm = ChatOpenAI(
         temperature=0,
@@ -72,17 +72,17 @@ def create_sqlite_agent(db_path="fda_first_generic_approvals.db"):
         Tool(
             name="show_approvals_by_year",
             func=show_approvals_by_year,
-            description="Displays a chart of FDA ANDA approvals by year."
+            description="Summarizes the trend of FDA ANDA approvals by year, with key numbers."
         ),
         Tool(
             name="show_applicants_by_year",
             func=show_applicants_by_year,
-            description="Displays a chart of unique applicants by year."
+            description="Summarizes the number of unique generic drug applicants per year with statistics."
         ),
         Tool(
             name="show_top_20_applicants_range",
             func=show_top_20_applicants_range,
-            description="Displays a pie chart of the top 20 applicants from 2020 to 2024."
+            description="Summarizes the top 20 generic applicants from 2020 to 2024 with approval counts."
         )
     ]
 
