@@ -45,14 +45,7 @@ This app helps users:
 - *"Show a chart of number of approvals by year."*
 - *"Who were the top 20 generic applicants from 2020 to 2024?"*
 
----
-
-### 📬 **Contact Me**
-Created by **Autumn Qiu**  
-📧 Email: autumn.qiut@gmail.com  
-🌐 GitHub: [appleunicorn](https://github.com/appleunicorn)
-
----
+---  
 """)
 
 # --- Q&A Section ---
@@ -70,10 +63,11 @@ if question:
         except Exception as e:
             st.error(f"Error: {e}")
 
-# --- Optional Chart Shortcuts ---
-st.sidebar.header("📊 Visual Charts")
+# --- Visual Chart Section (now in main area) ---
+st.markdown("---")
+st.subheader("📊 Key Insights from Data")
 
-chart_type = st.sidebar.selectbox("Choose Chart", [
+chart_type = st.selectbox("Choose a chart to view:", [
     "Approvals by Year",
     "Applicants by Year",
     "Top 20 Applicants (Single Year)",
@@ -81,25 +75,33 @@ chart_type = st.sidebar.selectbox("Choose Chart", [
 ])
 
 if chart_type == "Approvals by Year":
-    if st.sidebar.button("Show"):
+    if st.button("Show"):
         df = plot_anda_approvals_by_year(db_path=DB_PATH, show=True)
         st.dataframe(df)
 
 elif chart_type == "Applicants by Year":
-    if st.sidebar.button("Show"):
+    if st.button("Show"):
         df = plot_applicants_by_year(db_path=DB_PATH, show=True)
         st.dataframe(df)
 
 elif chart_type == "Top 20 Applicants (Single Year)":
-    year = st.sidebar.number_input("Year", value=2024)
-    if st.sidebar.button("Generate"):
+    year = st.number_input("Year", value=2024)
+    if st.button("Generate"):
         df = plot_top_20_applicants_pie(db_path=DB_PATH, year=year, show=True)
         st.dataframe(df)
 
 elif chart_type == "Top 20 Applicants (Year Range)":
-    start = st.sidebar.number_input("Start Year", value=2020)
-    end = st.sidebar.number_input("End Year", value=2024)
-    if st.sidebar.button("Generate Range"):
+    start = st.number_input("Start Year", value=2020)
+    end = st.number_input("End Year", value=2024)
+    if st.button("Generate Range"):
         df = plot_top_20_applicants_pie_range(start_year=start, end_year=end, db_path=DB_PATH, show=True)
         st.dataframe(df)
-#rerun trigger
+
+# --- Contact Me Section (still at the bottom) ---
+st.markdown("---")
+st.subheader("📬 Contact Me")
+st.markdown("""
+Created by **Autumn Qiu**  
+📧 Email: autumn.qiut@gmail.com  
+🌐 GitHub: [appleunicorn](https://github.com/appleunicorn)
+""")
