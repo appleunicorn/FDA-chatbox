@@ -1,5 +1,8 @@
 import streamlit as st
 
+st.write("✅ 1_home.py loaded successfully")
+
+
 st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 
 st.markdown("""

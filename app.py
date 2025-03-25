@@ -9,3 +9,4 @@ st.set_page_config(
 )
 
 # Do not add any Streamlit calls above this
+st.write("✅ App is running! Welcome to the FDA First Generic Approvals Explorer")
