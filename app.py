@@ -38,6 +38,7 @@ This app helps users:
 """)
 
 # --- 💬 Chatbot Section ---
+
 # --- 💬 Chatbot Section ---
 st.subheader("💬 Chat with the Data")
 
@@ -50,7 +51,7 @@ if "agent" not in st.session_state or "memory" not in st.session_state:
 
 question = st.text_input(
     "Ask a question about the FDA approval data:",
-    placeholder="e.g., Show chart of approvals by year"
+    placeholder="e.g., Which company had the most approvals in 2023?"
 )
 
 if question:
@@ -61,6 +62,18 @@ if question:
             st.write(response)
         except Exception as e:
             st.error(f"Error: {e}")
+
+# Show chat history
+if st.session_state.memory.buffer:
+    st.markdown("---")
+    st.subheader("🧠 Chat History")
+    for msg in st.session_state.memory.chat_memory.messages:
+        role = "You" if msg.type == "human" else "Bot"
+        st.markdown(f"**{role}:** {msg.content}")
+
+
+
+
 
 # Show chat history
 if st.session_state.memory.buffer:
