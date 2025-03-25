@@ -74,18 +74,18 @@ st.markdown("---")
 st.subheader("📊 Key Insights from Data")
 
 chart_type = st.selectbox("Choose a chart to view:", [
-    "Approvals by Year",
-    "Applicants by Year",
+    "Number of approvals by Year",
+    "Number of applicants by Year",
     "Top 20 Applicants (Single Year)",
     "Top 20 Applicants (Year Range)"
 ])
 
-if chart_type == "Approvals by Year":
+if chart_type == "Number of approvals by Year":
     if st.button("Show"):
         df = plot_anda_approvals_by_year(db_path=DB_PATH, show=True)
         st.dataframe(df)
 
-elif chart_type == "Applicants by Year":
+elif chart_type == "Number of applicants by Year":
     if st.button("Show"):
         df = plot_applicants_by_year(db_path=DB_PATH, show=True)
         st.dataframe(df)
