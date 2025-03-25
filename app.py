@@ -25,3 +25,6 @@ elif page == "📊 Key Insights":
     key_insights.run()
 elif page == "✉️ Contact":
     contact.run()
+
+
+#trivial change
