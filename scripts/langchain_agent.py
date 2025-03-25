@@ -14,23 +14,26 @@ import streamlit as st
 # 🔑 Load API key from Streamlit secrets
 open_api_key = st.secrets["OPENAI_API_KEY"]
 
-# 🛠️ Tool 1
-def show_approvals_by_year() -> str:
+# 🛠️ Tool
+
+def show_approvals_by_year(input: str = "") -> str:
     """Displays a chart of FDA ANDA approvals by year."""
     df = plot_anda_approvals_by_year(db_path="fda_first_generic_approvals.db", show=True)
     return "📊 Chart of FDA ANDA approvals by year displayed."
 
-# 🛠️ Tool 2
-def show_applicants_by_year() -> str:
+def show_applicants_by_year(input: str = "") -> str:
     """Displays a chart of unique applicants by year."""
     df = plot_applicants_by_year(db_path="fda_first_generic_approvals.db", show=True)
     return "📊 Chart of unique applicants by year displayed."
 
-# 🛠️ Tool 3
-def show_top_20_applicants_range() -> str:
+def show_top_20_applicants_range(input: str = "") -> str:
     """Displays a pie chart of the top 20 applicants from 2020 to 2024."""
     df = plot_top_20_applicants_pie_range(start_year=2020, end_year=2024, db_path="fda_first_generic_approvals.db", show=True)
     return "🥇 Pie chart of top 20 applicants (2020–2024) displayed."
+
+
+
+
 
 # 🧠 Create agent with tools + memory
 def create_sqlite_agent(db_path="fda_first_generic_approvals.db"):
