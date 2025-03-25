@@ -97,22 +97,25 @@ st.markdown("""
 """)
 
 
-
 # --- 🧠 Simple Scrollable Chat History Box ---
 st.markdown("---")
 st.subheader("🧠 Chat History")
 
 if st.session_state.chat_log:
+    st.markdown("### ")
     with st.expander("Click to view full conversation", expanded=True):
-        chat_container = st.container()
-        with chat_container:
-            st.markdown(
-                "<div style='height: 300px; overflow-y: auto; background-color: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px solid #ccc;'>",
-                unsafe_allow_html=True
-            )
-            for role, msg in st.session_state.chat_log:
-                st.markdown(f"**{role}:** {msg}")
-            st.markdown("</div>", unsafe_allow_html=True)
+        # HTML to create scrollable container
+        st.markdown("""
+        <div style='height: 300px; overflow-y: auto; background-color: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px solid #ccc;'>
+        """, unsafe_allow_html=True)
+
+        # Loop inside the grey box
+        for role, msg in st.session_state.chat_log:
+            st.markdown(f"**{role}:** {msg}")
+
+        # Close the scrollable div
+        st.markdown("</div>", unsafe_allow_html=True)
+
 else:
     st.info("No conversation history yet.")
 
