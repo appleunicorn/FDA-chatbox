@@ -35,12 +35,32 @@ CREATE TABLE {table_name} (
     anda_number TEXT,
     generic_name TEXT,
     anda_applicant TEXT,
+    alias_mapping TEXT, 
     brand_name TEXT,
     anda_approval_date DATE,
     anda_indication_description TEXT,
     import_timestamp DATETIME
 );
 """
+
+def get_alias_for_applicant(applicant: str) -> str:
+    alias_dict = {
+        "fresenius kabi usa, llc": "Fresenius",
+        "teva pharmaceuticals usa, inc.": "Teva",
+        "zydus pharmaceuticals (usa) inc.": "Zydus",
+        "sun pharmaceutical industries limited": "Sun Pharma",
+        "aurobindo pharma limited": "Aurobindo",
+        "lupin limited": "Lupin",
+        "cipla limited": "Cipla",
+        "mylan pharmaceuticals inc.": "Mylan",
+        "apotex inc.": "Apotex"
+        # add more aliases as needed
+    }
+
+    key = applicant.strip().lower()
+    return alias_dict.get(key, applicant.strip())
+
+
 conn.execute(create_table_query)
 
 # === Load & Insert Each CSV ===
@@ -67,6 +87,8 @@ for csv_file in csv_files:
     filename = os.path.basename(csv_file)
     year = int(filename.split("-")[4])
     df["year"] = year
+    df["alias_mapping"] = df["anda_applicant"].apply(get_alias_for_applicant)
+
 
     # 🕓 Extract and parse import timestamp from filename
     match = re.search(r"downloaded at-(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}[-+]\d{2}-\d{2})", filename)
@@ -91,6 +113,7 @@ for csv_file in csv_files:
         "anda_number",
         "generic_name",
         "anda_applicant",
+        "alias_mapping",
         "brand_name",
         "anda_approval_date",
         "anda_indication_description",
