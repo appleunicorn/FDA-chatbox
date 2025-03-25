@@ -23,7 +23,7 @@ def run():
     col1, col2 = st.columns(2)
     with col1:
         if st.button("🏠 Back to Home"):
-            st.switch_page("home.py")
+            st.switch_page("home")
     with col2:
         if st.button("📊 See Key Insights"):
-            st.switch_page("key_insights.py")
+            st.switch_page("key_insights")
