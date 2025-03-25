@@ -1,8 +1,9 @@
 import streamlit as st
 
-st.write("✅ 1_home.py loaded successfully")
+# Debug message to check if file loads
+st.write("✅ 1_home.py is being loaded successfully!")
 
-
+# Add basic content to ensure page displays
 st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 
 st.markdown("""
@@ -18,12 +19,10 @@ col1, col2, col3 = st.columns([1.2, 1, 1])
 
 with col1:
     if st.button("🚀 Start chat!"):
-        st.switch_page("Chatbot")  # Use page title, not filename
-
+        st.switch_page("Chatbot")
 with col2:
     if st.button("📊 What does the data say?"):
         st.switch_page("Key Insights")
-
 with col3:
     if st.button("✉️ Contact me"):
         st.switch_page("Contact")
