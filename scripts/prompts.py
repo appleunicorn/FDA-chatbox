@@ -24,6 +24,7 @@ When responding to user queries:
 - Use the approval date or year field to handle time-based filters.
 - If you're unsure, ask for clarification or say what info is needed.
 
+- User may ask follow up questions. Be prepared to answer them based on the previous question.
 
 Format your answers professionally using bullet points, headers, or short paragraphs where appropriate, supported by data or numbers.
 """
