@@ -76,7 +76,6 @@ st.subheader("📊 Key analysis")
 chart_type = st.selectbox("Choose a chart to view:", [
     "Number of approvals by Year",
     "Number of applicants by Year",
-    "Top 20 Applicants (Single Year)",
     "Top 20 Applicants (Year Range)"
 ])
 
