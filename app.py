@@ -8,7 +8,11 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Sidebar nav (manual, with session state)
+# ---- Initialize session state
+if "page" not in st.session_state:
+    st.session_state.page = "home"
+
+# ---- Sidebar Navigation
 st.sidebar.markdown("### 🧭 Navigation")
 page_choice = st.sidebar.radio(
     "Go to",
@@ -16,16 +20,17 @@ page_choice = st.sidebar.radio(
     label_visibility="collapsed"
 )
 
-# Convert emoji nav to internal state names
-page_map = {
+# Set session_state.page based on sidebar only if no button override
+emoji_to_key = {
     "🏠 Home": "home",
     "💬 Chatbot": "chatbot",
     "📊 Key Insights": "key_insights",
     "✉️ Contact": "contact"
 }
-st.session_state.page = page_map[page_choice]
+if not st.session_state.get("override_from_button"):
+    st.session_state.page = emoji_to_key[page_choice]
 
-# Load the selected page
+# ---- Render selected page
 if st.session_state.page == "home":
     home.run()
 elif st.session_state.page == "chatbot":
@@ -34,3 +39,6 @@ elif st.session_state.page == "key_insights":
     key_insights.run()
 elif st.session_state.page == "contact":
     contact.run()
+
+# Reset override flag (so sidebar works again after navigation)
+st.session_state.override_from_button = False

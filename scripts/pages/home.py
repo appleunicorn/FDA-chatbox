@@ -20,9 +20,15 @@ def run():
     with col1:
         if st.button("🚀 **Start chat!**"):
             st.session_state.page = "chatbot"
+            st.session_state.override_from_button = True
+            st.experimental_rerun()
     with col2:
         if st.button("📊 What does the data say?"):
             st.session_state.page = "key_insights"
+            st.session_state.override_from_button = True
+            st.experimental_rerun()
     with col3:
         if st.button("✉️ Contact Me"):
             st.session_state.page = "contact"
+            st.session_state.override_from_button = True
+            st.experimental_rerun()

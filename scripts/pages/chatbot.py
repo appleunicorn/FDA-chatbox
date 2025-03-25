@@ -1,28 +1,33 @@
 import streamlit as st
+from scripts.langchain_agent import create_sqlite_agent
 
 def run():
-    st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
+    st.title("💬 Chat with me about FDA data!")
+    st.markdown("Ask me about the FDA database:")
 
-    st.markdown("""
-        This web app explores **first-time generic drug approvals** granted by the U.S. FDA.  
-        📅 The data comes from the official [FDA source](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals).  
-        💡 The goal is to help researchers, analysts, and curious minds interactively explore this important approval data.
+    DB_PATH = "fda_first_generic_approvals.db"
+    agent = create_sqlite_agent(db_path=DB_PATH)
 
-        ---
-        ### What you can do here:
-        - Ask natural language questions about approval trends
-        - Visualize how many approvals occurred each year
-        - See which companies (applicants) were most active
-        - Explore shares of approvals by the top 20 applicants
-    """)
+    question = st.text_input("Enter your question:")
+    if question:
+        with st.spinner("🤖 Thinking..."):
+            try:
+                response = agent.run(question)
+                st.markdown("### ✅ Answer")
+                st.write(response)
+            except Exception as e:
+                st.error(f"Error: {e}")
 
-    col1, col2, col3 = st.columns([2, 2, 2])
+    # Navigation buttons
+    st.markdown("---")
+    col1, col2 = st.columns(2)
     with col1:
-        if st.button("🚀 **Start chat!**"):
-            st.session_state.page = "chatbot"
+        if st.button("🏠 Back to Home"):
+            st.session_state.page = "home"
+            st.session_state.override_from_button = True
+            st.experimental_rerun()
     with col2:
-        if st.button("📊 What does the data say?"):
+        if st.button("📊 See Key Insights"):
             st.session_state.page = "key_insights"
-    with col3:
-        if st.button("✉️ Contact Me"):
-            st.session_state.page = "contact"
+            st.session_state.override_from_button = True
+            st.experimental_rerun()
