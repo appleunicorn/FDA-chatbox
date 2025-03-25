@@ -1,5 +1,9 @@
 import streamlit as st
 from scripts import app_page_home, app_page_chatbot, app_page_key_insights
+import app_page_home
+import app_page_chatbot
+import app_page_key_insights
+
 
 PAGES = {
     "Home": app_page_home,
