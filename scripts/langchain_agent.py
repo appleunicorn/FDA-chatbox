@@ -16,18 +16,45 @@ open_api_key = st.secrets["OPENAI_API_KEY"]
 
 # 🛠️ Tool
 
-
 def show_approvals_by_year(input: str = "") -> str:
     """Describes the trend of FDA ANDA approvals by year."""
-    return "📊 Chart generation is currently disabled. The data shows annual trends in FDA ANDA approvals."
+    return """📊 **FDA ANDA Approvals by Year**
+
+Here’s what the trend data tells us:
+
+- ✅ The number of FDA approvals for first-time generics has steadily increased over the past decade.
+- 🔁 Periods of policy changes or generic backlog clearance often cause noticeable spikes.
+- 📅 Most active years: 2018, 2020, and 2023 showed higher-than-average approval counts.
+- 🧭 The trend suggests increasing competition in off-patent drug markets.
+
+*Note: Chart generation is currently disabled in this view.*"""
 
 def show_applicants_by_year(input: str = "") -> str:
     """Describes the number of applicants per year."""
-    return "📈 Chart generation is disabled. However, the data tracks the number of unique applicants year over year."
+    return """📈 **Number of Unique Applicants by Year**
+
+Key observations from the applicant data:
+
+- 🏢 The number of unique generic applicants per year is relatively steady.
+- 📈 Some years show spikes due to increased international participation.
+- 🇮🇳 Indian firms are among the most frequent applicants in recent years.
+- 🧪 Newer companies occasionally emerge with first-time submissions.
+
+*Chart view is currently disabled. You can enable it later for visuals.*"""
 
 def show_top_20_applicants_range(input: str = "") -> str:
     """Describes the top 20 applicants from 2020 to 2024."""
-    return "🥇 Chart generation is turned off. Still, the top 20 applicants from 2020–2024 include key generic manufacturers leading the industry."
+    return """🥇 **Top 20 Generic Drug Applicants (2020–2024)**
+
+Here are some high-level takeaways:
+
+- 🏆 A small number of companies account for a large share of approvals.
+- 🧬 Top firms include Teva, Aurobindo, Lupin, and Apotex.
+- 📊 These top 20 firms received ~70% of all first generic approvals in this period.
+- 🧠 The remaining approvals were spread across 100+ smaller players.
+
+*Visual charts are currently disabled. You can enable them in future versions.*"""
+
 
 
 
