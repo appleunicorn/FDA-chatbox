@@ -1,12 +1,5 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="Home",
-    page_icon="🏠",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
 st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 
 st.markdown("""
@@ -19,6 +12,7 @@ st.markdown("---")
 st.subheader("What would you like to do?")
 
 col1, col2, col3 = st.columns([1.2, 1, 1])
+
 with col1:
     if st.button("🚀 Start chat!"):
         st.switch_page("Chatbot")
