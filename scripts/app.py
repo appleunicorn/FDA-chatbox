@@ -9,14 +9,14 @@ from charts import (
 import os
 import sqlite3
 
-st.set_page_config(page_title="FDA GPT Explorer", layout="wide")
-st.title("💬 FDA First Generic Approvals Q&A")
+st.set_page_config(page_title="FDA chatbot", layout="wide")
+st.title("💬 FDA ANDA Approvals Chatbot for Generics")
 
 # --- Landing Page Info ---
 st.markdown("""
-Welcome to **FDA First Generic Approvals GPT Explorer** 🎉
+Welcome to **FDA First Generic Approvals Chatbot** 🎉
 
-This web app allows you to explore trends in first-time generic drug approvals by the U.S. Food and Drug Administration (FDA). It is powered by an interactive natural language agent using OpenAI and LangChain.
+This web app allows you to explore the insights based on FDA first-time generic drug approvals since 2016. It is powered by an interactive natural language agent using OpenAI and LangChain.
 
 ---
 
