@@ -1,4 +1,4 @@
-import streamlit as st
+import streamlit as st #trivial change
 
 st.set_page_config(page_title="Home", layout="wide")
 
@@ -7,7 +7,7 @@ st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 st.markdown("""
 This app helps you explore **first-time generic drug approvals** granted by the U.S. FDA.
 
-📅 **Data source**: [FDA website](https://www.fda.gov/drugs/drug-approvals-and-databases/first-generic-drug-approvals)  
+📅 **Data source**: [FDA website](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)  
 💡 **Purpose**: Enable interactive analysis of FDA's first generic (Gx) approvals for researchers, analysts, and curious minds.
 
 ---
