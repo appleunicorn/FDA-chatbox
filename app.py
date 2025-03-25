@@ -1,5 +1,5 @@
 import streamlit as st
-from pages import home, chatbot, key_insights, contact
+from scripts.pages import home, chatbot, key_insights, contact
 
 st.set_page_config(
     page_title="FDA First Generic Approvals",
@@ -8,7 +8,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Sidebar nav (custom!)
+# Sidebar navigation (custom)
 st.sidebar.markdown("### 🧭 Navigation")
 page = st.sidebar.radio(
     "Go to",
@@ -25,6 +25,3 @@ elif page == "📊 Key Insights":
     key_insights.run()
 elif page == "✉️ Contact":
     contact.run()
-
-
-#trivial change
