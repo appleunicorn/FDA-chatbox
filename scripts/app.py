@@ -10,22 +10,22 @@ import os
 import sqlite3
 
 st.set_page_config(page_title="FDA chatbot", layout="wide")
-st.title("💬 FDA ANDA Approvals Chatbot for Generics")
+st.title("💬 FDA ANDA Approvals Chatbot")
 
 # --- Landing Page Info ---
 st.markdown("""
 Welcome to **FDA First Generic Approvals Chatbot** 🎉
 
-This web app allows you to explore the insights based on FDA first-time generic drug approvals since 2016. It is powered by an interactive natural language agent using OpenAI and LangChain.
+This web app allows you to explore the data and insights based on FDA first-time generic drug ANDA approvals since 2016. It is powered by an interactive natural language agent using OpenAI and LangChain.
 
 ---
 
 ### 🧬 **About the Database**
 This dataset contains yearly records of **first generic ANDA (Abbreviated New Drug Application) approvals** from the FDA. First generics are the first version of a brand-name drug to be approved, marking the beginning of market competition.
 
-- **Data source**: [FDA First Generics](https://www.fda.gov/drugs/drug-approvals-and-databases/first-generic-drug-approvals)  
+- **Data source**: [FDA First Generics](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)  
 - **Data format**: CSV files downloaded from the FDA website  
-- **Data fields**: ANDA number, generic and brand name, applicant, approval date, indication, etc.
+- **Data fields**: ANDA number, generic and brand name, applicant (company), approval date, indication, etc.
 
 ---
 
@@ -41,9 +41,9 @@ This app helps users:
 ### 💡 **Try Asking Questions Like:**
 - *"What is the trend of ANDA approvals over the last 5 years?"*
 - *"Which company had the most first generics approved in 2023?"*
-- *"How many first generic applicants were there in 2020?"*
-- *"Show a chart of approvals by year."*
-- *"What are the top 20 generic applicants from 2020 to 2024?"*
+- *"How many first Gx applicants were there in 2020?"*
+- *"Show a chart of number of approvals by year."*
+- *"Who were the top 20 generic applicants from 2020 to 2024?"*
 
 ---
 
