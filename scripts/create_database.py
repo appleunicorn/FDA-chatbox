@@ -35,7 +35,7 @@ CREATE TABLE {table_name} (
     anda_number TEXT,
     generic_name TEXT,
     anda_applicant TEXT,
-    alias_mapping TEXT, 
+    company_name_short TEXT, 
     brand_name TEXT,
     anda_approval_date DATE,
     anda_indication_description TEXT,
@@ -87,7 +87,7 @@ for csv_file in csv_files:
     filename = os.path.basename(csv_file)
     year = int(filename.split("-")[4])
     df["year"] = year
-    df["alias_mapping"] = df["anda_applicant"].apply(get_alias_for_applicant)
+    df["company_name_short"] = df["anda_applicant"].apply(get_alias_for_applicant)
 
 
     # 🕓 Extract and parse import timestamp from filename
@@ -113,7 +113,7 @@ for csv_file in csv_files:
         "anda_number",
         "generic_name",
         "anda_applicant",
-        "alias_mapping",
+        "company_name_short",
         "brand_name",
         "anda_approval_date",
         "anda_indication_description",
