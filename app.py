@@ -11,7 +11,13 @@ from scripts.charts import (
 st.set_page_config(page_title="FDA chatbot", layout="wide")
 st.title("🤖 FDA ANDA Approvals Chatbot")
 
-# --- 🧾 Intro Section ---
+# --- 🧼 Always clear memory and chat log on refresh ---
+if "agent" in st.session_state:
+    st.session_state.agent.memory.clear()
+if "chat_log" in st.session_state:
+    st.session_state.chat_log.clear()
+
+# --- 🧬 Intro Section ---
 st.markdown("""
 Welcome to **FDA First Generic Approvals Chatbot** 🎉
 
@@ -37,7 +43,6 @@ if "agent" not in st.session_state or "memory" not in st.session_state:
     st.session_state.agent = agent
     st.session_state.memory = memory
 
-# Store chat logs manually for display
 if "chat_log" not in st.session_state:
     st.session_state.chat_log = []
 
@@ -48,48 +53,48 @@ if st.button("🧹 Wipe Memory"):
     st.session_state.chat_log.clear()
     st.success("Chat memory wiped. Start fresh!")
 
-# --- 📝 Input + Contextual Multi-Question Handler ---
+# --- 📝 Question Input + Multi-Question Logic ---
 question = st.text_input(
-    "Ask a question about the FDA 1st Gx ANDA approval data:",
-    placeholder="e.g., What is the trend of ANDA approvals over the last 5 years?"
+    "Ask a question about the FDA approval data:",
+    placeholder="e.g., Who were top players in past 5 years? In past 3 years? Compare the lists."
 )
 
 if question:
     sub_questions = [q.strip() for q in question.split("?") if q.strip()]
     full_context = ""
+    is_multi = len(sub_questions) > 1
 
     for i, q in enumerate(sub_questions, 1):
         q_full = q + "?"
-        # Append previous context for follow-ups
         if full_context:
-            input_query = f"{q_full} Based on the previous question: {full_context}"
-
+            input_query = f"{q_full} Based on the previous questions: {full_context}"
         else:
             input_query = q_full
 
-        with st.spinner(f"🤖 Answering Q{i}..."):
+        with st.spinner("🤖 Answering..."):
             try:
                 response = st.session_state.agent.run(input_query)
 
-                st.markdown(f"### 🔹 Q{i}: {q_full}")
+                label = f"### 🔹 Q{i}:" if is_multi else "### 🔹 Q:"
+                st.markdown(f"{label} {q_full}")
                 st.write(response)
 
-                # Save for chat history
                 st.session_state.chat_log.append(("You", q_full))
                 st.session_state.chat_log.append(("Bot", response))
 
-                full_context += " " + q_full  # Build full rolling context
-
+                full_context += " " + q_full
             except Exception as e:
-                st.error(f"Error processing Q{i}: {e}")
+                st.error(f"Error: {e}")
 
-# --- 💡 Suggested Questions ---
+# --- 💡 Sample Questions ---
 st.markdown("---")
 st.subheader("💡 Try asking:")
 st.markdown("""
 - *What is the trend of ANDA approvals over the last 5 years?*  
-- *Which company had the most first generics approved in 2024?*  
-- *How many first Gx approvals were there in 2020-2024?*  
+- *Which company had the most first generics approved in 2023?*  
+- *How many first Gx applicants were there in 2020?*  
+- *Who were the top 5 companies from 2020 to 2024?*  
+- *Compare top applicants in the past 5 years vs past 3 years.*
 """)
 
 # --- 🧠 Scrollable Chat History Box ---
@@ -99,11 +104,21 @@ st.subheader("🧠 Chat History")
 if st.session_state.chat_log:
     history_html = ""
     for role, msg in st.session_state.chat_log:
-        icon = "🧑" if role == "You" else "🤖"
-        history_html += f"<div><strong>{icon} {role}:</strong> {msg}</div><br>"
+        if role == "You":
+            history_html += f"""
+            <div style='background-color:#e7f3fe; padding:10px; border-radius:8px; margin-bottom:10px;'>
+                <strong>🧑 You:</strong> <i>{msg}</i>
+            </div>
+            """
+        else:
+            history_html += f"""
+            <div style='background-color:#f1f1f1; padding:10px; border-radius:8px; margin-bottom:10px;'>
+                <strong>🤖 Bot:</strong> {msg}
+            </div>
+            """
 
     st.markdown(f"""
-    <div style='height: 300px; overflow-y: auto; padding: 10px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px;'>
+    <div style='height: 300px; overflow-y: auto; padding: 10px; border: 1px solid #ddd; border-radius: 5px; background-color: #fafafa;'>
         {history_html}
     </div>
     """, unsafe_allow_html=True)
