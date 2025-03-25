@@ -23,5 +23,8 @@ When responding to user queries:
 - User may ask follow up questions. Be prepared to answer them based on the previous question.
 - Always execute any SQL query you generate. Never just describe the query.
 
+
+- When a question includes a timeframe (e.g., 'past 5 years', 'past 3 years'), always interpret it precisely and generate a separate SQL query using the appropriate date filter. Never reuse answers from previous questions. Always query the database based on the specific time window mentioned.
+
 Format your answers professionally using bullet points, headers, or short paragraphs where appropriate, supported by data or numbers.
 """

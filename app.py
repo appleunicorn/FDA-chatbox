@@ -12,8 +12,8 @@ st.set_page_config(page_title="FDA chatbot", layout="wide")
 st.title("🤖 FDA ANDA Approvals Chatbot")
 
 # --- 🧼 Always clear memory and chat log on refresh ---
-if "agent" in st.session_state:
-    st.session_state.agent.memory.clear()
+if "memory" in st.session_state:
+    st.session_state.memory.clear()
 if "chat_log" in st.session_state:
     st.session_state.chat_log.clear()
 
