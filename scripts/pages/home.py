@@ -19,10 +19,10 @@ def run():
     col1, col2, col3 = st.columns([2, 2, 2])
     with col1:
         if st.button("🚀 **Start chat!**"):
-            st.switch_page("chatbot")
+            st.session_state.page = "chatbot"
     with col2:
         if st.button("📊 What does the data say?"):
-            st.switch_page("key_insights")
+            st.session_state.page = "key_insights"
     with col3:
         if st.button("✉️ Contact Me"):
-            st.switch_page("contact")
+            st.session_state.page = "contact"

@@ -8,20 +8,29 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Sidebar navigation (custom)
+# Sidebar nav (manual, with session state)
 st.sidebar.markdown("### 🧭 Navigation")
-page = st.sidebar.radio(
+page_choice = st.sidebar.radio(
     "Go to",
     ["🏠 Home", "💬 Chatbot", "📊 Key Insights", "✉️ Contact"],
     label_visibility="collapsed"
 )
 
-# Route to page
-if page == "🏠 Home":
+# Convert emoji nav to internal state names
+page_map = {
+    "🏠 Home": "home",
+    "💬 Chatbot": "chatbot",
+    "📊 Key Insights": "key_insights",
+    "✉️ Contact": "contact"
+}
+st.session_state.page = page_map[page_choice]
+
+# Load the selected page
+if st.session_state.page == "home":
     home.run()
-elif page == "💬 Chatbot":
+elif st.session_state.page == "chatbot":
     chatbot.run()
-elif page == "📊 Key Insights":
+elif st.session_state.page == "key_insights":
     key_insights.run()
-elif page == "✉️ Contact":
+elif st.session_state.page == "contact":
     contact.run()
