@@ -1,6 +1,6 @@
 import streamlit as st
 
-# ❗ This MUST be the very first Streamlit call
+# This must be the very first Streamlit function call
 st.set_page_config(
     page_title="FDA First Generic Approvals",
     page_icon="💊",
@@ -8,5 +8,4 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Do NOT include anything else here that uses Streamlit
-# Streamlit will auto-load 1_home.py from the /pages folder
+# Do not add any Streamlit calls above this
