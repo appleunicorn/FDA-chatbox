@@ -15,13 +15,13 @@ def main():
 
     with col1:
         if st.button("🚀 Start chat!"):
-            st.switch_page("2_chatbot.py")
+            st.switch_page("pages/2_chatbot.py")
     with col2:
         if st.button("📊 What does the data say?"):
-            st.switch_page("3_key_insights.py")
+            st.switch_page("pages/3_key_insights.py")
     with col3:
         if st.button("✉️ Contact me"):
-            st.switch_page("4_contact.py")
+            st.switch_page("pages/4_contact.py")
 
 # 🔁 Call the main function!
 main()
