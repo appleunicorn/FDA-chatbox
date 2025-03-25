@@ -56,7 +56,7 @@ if st.button("🧹 Wipe Memory"):
 # --- 📝 Question Input + Multi-Question Logic ---
 question = st.text_input(
     "Ask a question about the FDA approval data:",
-    placeholder="e.g., Who were top players in past 5 years? In past 3 years? Compare the lists."
+    placeholder="e.g., Who were top players in past 5 years in number of approvals?"
 )
 
 if question:
@@ -94,7 +94,6 @@ st.markdown("""
 - *Which company had the most first generics approved in 2023?*  
 - *How many first Gx applicants were there in 2020?*  
 - *Who were the top 5 companies from 2020 to 2024?*  
-- *Compare top applicants in the past 5 years vs past 3 years.*
 """)
 
 # --- 🧠 Scrollable Chat History Box ---
