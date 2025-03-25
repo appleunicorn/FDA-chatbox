@@ -98,7 +98,6 @@ st.markdown("""
 """)
 
 
-
 # --- 🧠 Chat History Section ---
 st.markdown("---")
 st.subheader("🧠 Chat History")
@@ -106,34 +105,22 @@ st.subheader("🧠 Chat History")
 if st.session_state.get("chat_log"):
     chat_lines = []
     for role, msg in st.session_state.chat_log:
-        if role == "You":
-            # Bold the user's question, no Markdown parsing needed
-            chat_lines.append(f"<p style='margin: 0'><strong>{role}:</strong> <strong>{msg}</strong></p>")
-        else:
-            # Preserve bullet points using Markdown rendering
-            chat_lines.append(f"<p style='margin: 0'><strong>{role}:</strong></p>")
-            chat_lines.append(f"<div style='margin-left: 1em'>{st.markdown(msg)}</div>")
+        chat_lines.append(f"**{role}:** {msg}")
 
-    # Wrap content in scrollable container
+    chat_markdown = "<br>".join(chat_lines)  # use <br> instead of double newlines
+
     st.markdown(
         f"""
         <div style='height:300px; overflow-y:auto; padding:10px;
                     background-color:#f9f9f9; border:1px solid #ccc;
                     border-radius:5px; line-height: 1.3; font-size: 0.95rem;'>
+            {chat_markdown}
+        </div>
         """,
         unsafe_allow_html=True
     )
-
-    for line in chat_lines:
-        if isinstance(line, str):
-            st.markdown(line, unsafe_allow_html=True)
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
 else:
     st.info("No conversation history yet.")
-
-
 
 
 
