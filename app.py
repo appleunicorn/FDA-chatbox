@@ -71,7 +71,7 @@ st.markdown("""
 
 # --- 📊 Visual Chart Section ---
 st.markdown("---")
-st.subheader("📊 Key Insights from Data")
+st.subheader("📊 Key analysis")
 
 chart_type = st.selectbox("Choose a chart to view:", [
     "Number of approvals by Year",
