@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
+st.title("Loaded 1_home.py successfully! 🏠 Welcome to FDA First Generic Approvals Explorer")
 
 st.markdown("""
 This web app explores **first-time generic drug approvals** granted by the U.S. FDA.  

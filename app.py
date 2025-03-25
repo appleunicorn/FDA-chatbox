@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.info("👋 app.py is running")
+
 st.set_page_config(
     page_title="FDA First Generic Approvals",
     page_icon="💊",
