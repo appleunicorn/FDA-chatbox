@@ -102,3 +102,4 @@ elif chart_type == "Top 20 Applicants (Year Range)":
     if st.sidebar.button("Generate Range"):
         df = plot_top_20_applicants_pie_range(start_year=start, end_year=end, db_path=DB_PATH, show=True)
         st.dataframe(df)
+#rerun trigger
