@@ -37,54 +37,37 @@ This app helps users:
 ---
 """)
 
-# --- 💡 Clickable Guiding Questions ---
-st.subheader("💡 Try asking one of these:")
-guiding_questions = [
-    "What is the trend of ANDA approvals over the last 5 years?",
-    "Which company had the most first generics approved in 2023?",
-    "How many first Gx applicants were there in 2020?",
-    "Show a chart of number of approvals by year.",
-    "Who were the top 20 generic applicants from 2020 to 2024?"
-]
-
-clicked_question = st.radio("Choose a question:", guiding_questions, index=None)
-
 # --- 💬 Chatbot Section ---
-st.markdown("---")
 st.subheader("💬 Chat with the Data")
 
 DB_PATH = "fda_first_generic_approvals.db"
 agent = create_sqlite_agent(db_path=DB_PATH)
 
-# Store and manage chat question
-if "question" not in st.session_state:
-    st.session_state.question = ""
+question = st.text_input(
+    "Ask a question about the FDA approval data:",
+    placeholder="e.g., Which company had the most first generics approved in 2023?"
+)
 
-if clicked_question:
-    st.session_state.question = clicked_question
+if question:
+    with st.spinner("🤖 Thinking..."):
+        try:
+            response = agent.run(question)
+            st.markdown("### ✅ Answer")
+            st.write(response)
+        except Exception as e:
+            st.error(f"Error: {e}")
 
-with st.container():
-    st.markdown("**Ask anything about the FDA ANDA approval database.**")
+# --- 💡 Guiding Questions (non-clickable) ---
+st.markdown("---")
+st.subheader("💡 Try asking one of these:")
 
-    question = st.text_input(
-        "Type your question below:",
-        value=st.session_state.question,
-        key="chat_input",
-        label_visibility="collapsed",
-        placeholder="e.g., Which company had the most first generics approved in 2023?"
-    )
-
-    if question != st.session_state.question:
-        st.session_state.question = question
-
-    if st.session_state.question:
-        with st.spinner("🤖 Thinking..."):
-            try:
-                response = agent.run(st.session_state.question)
-                st.markdown("### ✅ Answer")
-                st.write(response)
-            except Exception as e:
-                st.error(f"Error: {e}")
+st.markdown("""
+- *What is the trend of ANDA approvals over the last 5 years?*  
+- *Which company had the most first generics approved in 2023?*  
+- *How many first Gx applicants were there in 2020?*  
+- *Show a chart of number of approvals by year.*  
+- *Who were the top 20 generic applicants from 2020 to 2024?*  
+""")
 
 # --- 📊 Visual Chart Section ---
 st.markdown("---")
