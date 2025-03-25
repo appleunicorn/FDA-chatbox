@@ -90,12 +90,6 @@ elif chart_type == "Number of applicants by Year":
         df = plot_applicants_by_year(db_path=DB_PATH, show=True)
         st.dataframe(df)
 
-elif chart_type == "Top 20 Applicants (Single Year)":
-    year = st.number_input("Year", value=2024)
-    if st.button("Generate"):
-        df = plot_top_20_applicants_pie(db_path=DB_PATH, year=year, show=True)
-        st.dataframe(df)
-
 elif chart_type == "Top 20 Applicants (Year Range)":
     start = st.number_input("Start Year", value=2020)
     end = st.number_input("End Year", value=2024)
