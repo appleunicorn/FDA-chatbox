@@ -1,7 +1,6 @@
 import streamlit as st
 
-st.info("👋 app.py is running")
-
+# ❗ This MUST be the very first Streamlit call
 st.set_page_config(
     page_title="FDA First Generic Approvals",
     page_icon="💊",
@@ -9,5 +8,5 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Fallback message if someone runs app.py directly
-st.markdown("<!-- This app uses multipage navigation -->")
+# Do NOT include anything else here that uses Streamlit
+# Streamlit will auto-load 1_home.py from the /pages folder

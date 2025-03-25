@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("Loaded 1_home.py successfully! 🏠 Welcome to FDA First Generic Approvals Explorer")
+st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 
 st.markdown("""
 This web app explores **first-time generic drug approvals** granted by the U.S. FDA.  
@@ -15,10 +15,12 @@ col1, col2, col3 = st.columns([1.2, 1, 1])
 
 with col1:
     if st.button("🚀 Start chat!"):
-        st.switch_page("Chatbot")
+        st.switch_page("Chatbot")  # Use page title, not filename
+
 with col2:
     if st.button("📊 What does the data say?"):
         st.switch_page("Key Insights")
+
 with col3:
     if st.button("✉️ Contact me"):
         st.switch_page("Contact")
