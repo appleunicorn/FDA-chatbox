@@ -1,30 +1,30 @@
 import streamlit as st
 
-def main():
-    st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
+st.set_page_config(
+    page_title="Home",
+    page_icon="🏠",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-    st.markdown("""
-        This web app explores **first-time generic drug approvals** granted by the U.S. FDA.  
-        📅 The data comes from the official [FDA source](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals).  
-        💡 The goal is to help researchers, analysts, and curious minds interactively explore this important approval data.
-    """)
+st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 
-    st.markdown("---")
-    st.subheader("What would you like to do?")
-    col1, col2, col3 = st.columns([1.2, 1, 1])
+st.markdown("""
+This web app explores **first-time generic drug approvals** granted by the U.S. FDA.  
+📅 The data comes from the official [FDA source](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals).  
+💡 The goal is to help researchers, analysts, and curious minds interactively explore this important approval data.
+""")
 
-    with col1:
-        if st.button("🚀 Start chat!"):
-            st.switch_page("Chatbot")  # ✅ not the filename
+st.markdown("---")
+st.subheader("What would you like to do?")
 
-    with col2:
-        if st.button("📊 What does the data say?"):
-            st.switch_page("Key Insights")  # ✅ from page title
-
-    with col3:
-        if st.button("✉️ Contact me"):
-            st.switch_page("Contact")  # ✅ matches page title
-
-
-# 🔁 Call the main function!
-main()
+col1, col2, col3 = st.columns([1.2, 1, 1])
+with col1:
+    if st.button("🚀 Start chat!"):
+        st.switch_page("Chatbot")
+with col2:
+    if st.button("📊 What does the data say?"):
+        st.switch_page("Key Insights")
+with col3:
+    if st.button("✉️ Contact me"):
+        st.switch_page("Contact")
