@@ -120,9 +120,11 @@ if st.session_state.chat_log:
     <div style='height: 300px; overflow-y: auto; padding: 10px; border: 1px solid #ddd; border-radius: 5px; background-color: #fafafa;'>
         {history_html}
     </div>
-    """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)  # ✅ THIS IS THE IMPORTANT FIX
 else:
     st.info("No conversation history yet.")
+
+
 
 # --- 📬 Contact Section ---
 st.markdown("---")
