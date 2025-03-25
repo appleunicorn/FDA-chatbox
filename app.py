@@ -62,7 +62,8 @@ if question:
         q_full = q + "?"
         # Append previous context for follow-ups
         if full_context:
-            input_query = f"{q_full} (based on previous context: '{full_context}')"
+            input_query = f"{q_full} Based on the previous question: {full_context}"
+
         else:
             input_query = q_full
 
