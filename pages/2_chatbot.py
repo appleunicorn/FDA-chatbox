@@ -1,36 +1,42 @@
 import streamlit as st
-from scripts.langchain_agent import create_sqlite_agent
 
-st.set_page_config(page_title="Chatbot", layout="wide")
+st.set_page_config(page_title="Home", layout="wide")
 
-st.title("💬 Chat with me about FDA data!")
+st.sidebar.title("🧭 Navigation")
+st.sidebar.page_link("app.py", label="🏠 Home", icon="🏠")
+st.sidebar.page_link("pages/2_chatbot.py", label="💬 Chatbot")
+st.sidebar.page_link("pages/3_key_insights.py", label="📊 Key Insights")
+st.sidebar.page_link("pages/4_contact.py", label="✉️ Contact")
 
-agent = create_sqlite_agent(db_path="fda_first_generic_approvals.db")
+st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 
-st.markdown("#### Ask me about the FDA database:")
-
-question = st.text_input("")
-
-if question:
-    with st.spinner("🤖 Thinking..."):
-        try:
-            response = agent.run(question)
-            st.markdown("### ✅ Answer")
-            st.write(response)
-        except Exception as e:
-            st.error(f"Error: {e}")
-
-st.markdown("##### 💡 Try asking:")
 st.markdown("""
-- How many first generic approvals were there in 2023?
-- Who are the top 5 companies by number of approvals?
-- What is the trend in approvals from 2016 to 2024?
+This web app explores **first-time generic drug approvals** granted by the U.S. FDA.
+
+📅 The data comes directly from the [FDA website](https://www.fda.gov/drugs/drug-approvals-and-databases/first-generic-drug-approvals).
+
+💡 The goal is to help researchers, analysts, and curious minds interactively explore this important approval data.
+
+---
+### 🤖 What you can do here:
+- Ask natural language questions about approval trends
+- Visualize how many approvals occurred each year
+- See which companies (applicants) were most active
+- Explore the share of approvals by top 20 applicants
 """)
 
-col1, col2 = st.columns(2)
+st.markdown("---")
+
+col1, col2, col3 = st.columns([2, 2, 2])
+
 with col1:
-    if st.button("🏠 Go to Home"):
-        st.switch_page("pages/1_home.py")
+    if st.button("🚀 **Start chat!**"):
+        st.switch_page("pages/2_chatbot.py")
+
 with col2:
-    if st.button("📊 Go to Key Insights"):
+    if st.button("📈 What does the data say?"):
         st.switch_page("pages/3_key_insights.py")
+
+with col3:
+    if st.button("✉️ Contact me"):
+        st.switch_page("pages/4_contact.py")
