@@ -1,7 +1,10 @@
 import streamlit as st
 
-st.set_page_config(page_title="FDA GPT Explorer", layout="wide")
+st.set_page_config(
+    page_title="FDA First Generic Explorer",
+    page_icon="💊",
+    layout="wide"
+)
 
-# Streamlit will auto-detect pages in the `pages/` directory
-st.title("FDA GPT Explorer")
-st.markdown("Use the sidebar to explore the app.")
+# Redirect users to home automatically
+st.switch_page("pages/1_home.py")
