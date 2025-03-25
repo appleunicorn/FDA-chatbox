@@ -11,25 +11,28 @@ from scripts.charts import (
 from .prompts import AGENT_SYSTEM_PROMPT
 import streamlit as st
 
+# 🔑 Load API key from Streamlit secrets
 open_api_key = st.secrets["OPENAI_API_KEY"]
 
-# 🛠️ Chart tools
+# 🛠️ Tool 1
 def show_approvals_by_year() -> str:
     """Displays a chart of FDA ANDA approvals by year."""
     df = plot_anda_approvals_by_year(db_path="fda_first_generic_approvals.db", show=True)
     return "📊 Chart of FDA ANDA approvals by year displayed."
 
+# 🛠️ Tool 2
 def show_applicants_by_year() -> str:
     """Displays a chart of unique applicants by year."""
     df = plot_applicants_by_year(db_path="fda_first_generic_approvals.db", show=True)
     return "📊 Chart of unique applicants by year displayed."
 
+# 🛠️ Tool 3
 def show_top_20_applicants_range() -> str:
     """Displays a pie chart of the top 20 applicants from 2020 to 2024."""
     df = plot_top_20_applicants_pie_range(start_year=2020, end_year=2024, db_path="fda_first_generic_approvals.db", show=True)
     return "🥇 Pie chart of top 20 applicants (2020–2024) displayed."
 
-# 🚀 Create LangChain agent with chart tools + memory
+# 🧠 Create agent with tools + memory
 def create_sqlite_agent(db_path="fda_first_generic_approvals.db"):
     llm = ChatOpenAI(
         temperature=0,
@@ -39,17 +42,17 @@ def create_sqlite_agent(db_path="fda_first_generic_approvals.db"):
 
     tools = [
         Tool(
-            name="Show Approvals by Year",
+            name="show_approvals_by_year",
             func=show_approvals_by_year,
             description="Displays a chart of FDA ANDA approvals by year."
         ),
         Tool(
-            name="Show Applicants by Year",
+            name="show_applicants_by_year",
             func=show_applicants_by_year,
             description="Displays a chart of unique applicants by year."
         ),
         Tool(
-            name="Show Top 20 Applicants (2020–2024)",
+            name="show_top_20_applicants_range",
             func=show_top_20_applicants_range,
             description="Displays a pie chart of the top 20 applicants from 2020 to 2024."
         )
