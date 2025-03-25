@@ -38,10 +38,14 @@ This app helps users:
 """)
 
 # --- 💬 Chatbot Section ---
+# --- Chatbot Section ---
 st.subheader("💬 Chat with the Data")
 
 DB_PATH = "fda_first_generic_approvals.db"
-agent = create_sqlite_agent(db_path=DB_PATH)
+
+# ✅ Store agent with memory in session
+if "agent" not in st.session_state:
+    st.session_state.agent = create_sqlite_agent(db_path=DB_PATH)
 
 question = st.text_input(
     "Ask a question about the FDA approval data:",
@@ -51,11 +55,12 @@ question = st.text_input(
 if question:
     with st.spinner("🤖 Thinking..."):
         try:
-            response = agent.run(question)
+            response = st.session_state.agent.run(question)
             st.markdown("### ✅ Answer")
             st.write(response)
         except Exception as e:
             st.error(f"Error: {e}")
+
 
 # --- 💡 Guiding Questions (non-clickable) ---
 st.markdown("---")
