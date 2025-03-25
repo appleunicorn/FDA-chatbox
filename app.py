@@ -105,14 +105,12 @@ if st.session_state.chat_log:
     for role, msg in st.session_state.chat_log:
         if role == "You":
             history_html += f"""
-            <div style='background-color:#e7f3fe; padding:10px; border-radius:8px; margin-bottom:10px;'>
-                <strong>🧑 You:</strong> <i>{msg}</i>
+            <strong>🧑 You:</strong> <i>{msg}</i>
             </div>
             """
         else:
             history_html += f"""
-            <div style='background-color:#f1f1f1; padding:10px; border-radius:8px; margin-bottom:10px;'>
-                <strong>🤖 Bot:</strong> {msg}
+            <strong>🤖 Bot:</strong> {msg}
             </div>
             """
 
@@ -126,7 +124,7 @@ else:
     st.info("No conversation history yet.")
 
 
-    
+
 
 # --- 📬 Contact Section ---
 st.markdown("---")
