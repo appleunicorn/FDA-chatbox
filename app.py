@@ -7,4 +7,5 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# This file won't display anything since Streamlit will default to `1_home.py`
+# Fallback message if someone runs app.py directly
+st.markdown("<!-- This app uses multipage navigation -->")
