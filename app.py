@@ -42,12 +42,16 @@ if "agent" not in st.session_state or "memory" not in st.session_state:
 if "chat_log" not in st.session_state:
     st.session_state.chat_log = []
 
+
 # --- 🧹 Wipe Memory Button ---
 st.markdown("---")
 if st.button("🧹 Wipe Memory"):
-    st.session_state.memory.clear()
-    st.session_state.chat_log.clear()
+    if "memory" in st.session_state:
+        st.session_state.memory.clear()
+    if "chat_log" in st.session_state:
+        st.session_state.chat_log.clear()
     st.success("Chat memory wiped. Start fresh!")
+
 
 # --- 📝 Question Input + Multi-Question Logic ---
 question = st.text_area(
@@ -94,8 +98,6 @@ st.markdown("""
 """)
 
 
-
-
 # --- 🧠 Chat History Section ---
 st.markdown("---")
 st.subheader("🧠 Chat History")
@@ -105,19 +107,20 @@ if st.session_state.get("chat_log"):
     for role, msg in st.session_state.chat_log:
         chat_lines.append(f"**{role}:** {msg}")
 
-    chat_markdown = "\n\n".join(chat_lines)
+    chat_markdown = "<br>".join(chat_lines)  # use <br> instead of double newlines
 
     st.markdown(
         f"""
-        <div style='height:300px; overflow-y:auto; padding:10px; background-color:#f9f9f9; border:1px solid #ccc; border-radius:5px;'>
-            <div style='white-space: pre-wrap;'>{chat_markdown}</div>
+        <div style='height:300px; overflow-y:auto; padding:10px;
+                    background-color:#f9f9f9; border:1px solid #ccc;
+                    border-radius:5px; line-height: 1.3; font-size: 0.95rem;'>
+            {chat_markdown}
         </div>
         """,
         unsafe_allow_html=True
     )
 else:
     st.info("No conversation history yet.")
-
 
 
 
