@@ -11,11 +11,7 @@ from scripts.charts import (
 st.set_page_config(page_title="FDA chatbot", layout="wide")
 st.title("🤖 FDA ANDA Approvals Chatbot")
 
-# --- 🧼 Always clear memory and chat log on refresh ---
-if "memory" in st.session_state:
-    st.session_state.memory.clear()
-if "chat_log" in st.session_state:
-    st.session_state.chat_log.clear()
+
 
 # --- 🧬 Intro Section ---
 st.markdown("""
@@ -54,9 +50,10 @@ if st.button("🧹 Wipe Memory"):
     st.success("Chat memory wiped. Start fresh!")
 
 # --- 📝 Question Input + Multi-Question Logic ---
-question = st.text_input(
+question = st.text_area(
     "Ask a question about the FDA approval data:",
-    placeholder="e.g., Who were top players in past 5 years in number of approvals?"
+    placeholder="e.g., Who were the top applicants in the past 5 years? In the past 3 years? Compare them.",
+    height=100
 )
 
 if question:
@@ -104,24 +101,23 @@ st.markdown("---")
 st.subheader("🧠 Chat History")
 
 if st.session_state.get("chat_log"):
-    with st.container():
-        chat_lines = []
-        for role, msg in st.session_state.chat_log:
-            chat_lines.append(f"**{role}:** {msg}")
+    chat_lines = []
+    for role, msg in st.session_state.chat_log:
+        chat_lines.append(f"**{role}:** {msg}")
 
-        # Join all lines into one Markdown block inside scrollable div
-        chat_markdown = "\n\n".join(chat_lines)
+    chat_markdown = "\n\n".join(chat_lines)
 
-        st.markdown(
-            f"""
-            <div style='height:300px; overflow-y:auto; padding:10px; background-color:#f9f9f9; border:1px solid #ccc; border-radius:5px;'>
-                <div style='white-space: pre-wrap;'>{chat_markdown}</div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+    st.markdown(
+        f"""
+        <div style='height:300px; overflow-y:auto; padding:10px; background-color:#f9f9f9; border:1px solid #ccc; border-radius:5px;'>
+            <div style='white-space: pre-wrap;'>{chat_markdown}</div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 else:
     st.info("No conversation history yet.")
+
 
 
 
