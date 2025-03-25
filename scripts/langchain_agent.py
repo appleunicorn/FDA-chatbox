@@ -20,17 +20,16 @@ def create_sqlite_agent(db_path="fda_first_generic_approvals.db"):
     db = SQLDatabase.from_uri(db_uri)
     toolkit = CommunitySQLToolkit(db=db, llm=llm)
 
-    # 🧠 Add memory object
+    # ✅ Memory to track conversation
     memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
-    # 🛠️ Create the agent with memory
     agent_executor = create_sql_agent(
         llm=llm,
         toolkit=toolkit,
         verbose=True,
-        agent_type="openai-functions",  # or "chat-zero-shot-react-description"
+        agent_type="openai-functions",
         handle_parsing_errors=True,
         memory=memory,
         system_message=AGENT_SYSTEM_PROMPT
     )
-    return agent_executor
+    return agent_executor, memory

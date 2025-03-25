@@ -38,14 +38,17 @@ This app helps users:
 """)
 
 # --- 💬 Chatbot Section ---
-# --- Chatbot Section ---
+
+# --- 💬 Chatbot Section ---
 st.subheader("💬 Chat with the Data")
 
 DB_PATH = "fda_first_generic_approvals.db"
 
-# ✅ Store agent with memory in session
-if "agent" not in st.session_state:
-    st.session_state.agent = create_sqlite_agent(db_path=DB_PATH)
+# Create and store agent + memory only once
+if "agent" not in st.session_state or "memory" not in st.session_state:
+    agent, memory = create_sqlite_agent(db_path=DB_PATH)
+    st.session_state.agent = agent
+    st.session_state.memory = memory
 
 question = st.text_input(
     "Ask a question about the FDA approval data:",
@@ -60,6 +63,19 @@ if question:
             st.write(response)
         except Exception as e:
             st.error(f"Error: {e}")
+
+# --- 🧾 Display Chat History ---
+if st.session_state.memory.buffer:
+    st.markdown("---")
+    st.subheader("🧠 Chat History")
+
+    for msg in st.session_state.memory.chat_memory.messages:
+        if msg.type == "human":
+            st.markdown(f"**You:** {msg.content}")
+        elif msg.type == "ai":
+            st.markdown(f"**Bot:** {msg.content}")
+
+
 
 
 # --- 💡 Guiding Questions (non-clickable) ---
