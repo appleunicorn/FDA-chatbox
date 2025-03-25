@@ -1,29 +1,33 @@
 import streamlit as st
 
-def app():
-    st.title("💊 FDA First Generic Approvals Explorer")
+def run():
+    st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 
     st.markdown("""
-    ### 🧬 About the Database
-    This database tracks **first generic drug approvals (Gx)** by the U.S. FDA. First generics are important as they mark the first time a non-brand version of a drug is approved, often lowering drug costs and increasing access.
+        This web app explores **first-time generic drug approvals** granted by the U.S. FDA.  
+        📅 The data comes directly from the [FDA website](https://www.fda.gov/drugs/drug-approvals-and-databases/first-generic-drug-approvals).  
+        💡 The goal is to help researchers, analysts, and curious minds interactively explore this important approval data.
 
-    ### 🎯 Purpose of this App
-    This webapp allows you to:
-    - Ask natural language questions about the FDA Gx approval data
-    - Visualize trends and company activity in first generic approvals
-    - Interact with charts and key summaries
+        ---
+        ### 🤖 What you can do here
+        - Ask natural language questions about approval trends
+        - Visualize how many approvals occurred each year
+        - See which companies (applicants) were most active
+        - Explore the share of approvals by top 20 applicants
 
-    ### 🧠 Try Asking Questions Like:
-    - *"How many approvals were there in 2023?"*
-    - *"Which company had the most ANDA approvals?"*
-    - *"What is the trend in first generics from 2015 to 2024?"*
-
-    ---
+        ---
     """)
 
-    if st.button("🔍 Go to Chatbot"):
-        st.switch_page("scripts/app_page_chatbot.py")
+    col1, col2, col3 = st.columns([2, 2, 2])
 
-    st.markdown("---")
-    st.subheader("📬 Contact Me")
-    st.markdown("For questions or feedback, feel free to [email me](mailto:autumn.qiut@gmail.com)")
+    with col1:
+        if st.button("🚀 **Start chat!**"):
+            st.switch_page("scripts/app_page_chatbot.py")
+
+    with col2:
+        if st.button("📈 What does the data say?"):
+            st.switch_page("scripts/app_page_key_insights.py")
+
+    with col3:
+        if st.button("✉️ Contact Me"):
+            st.switch_page("scripts/app_page_contact.py")
