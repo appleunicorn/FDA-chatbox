@@ -1,5 +1,15 @@
 import pandas as pd
 import altair as alt
+import streamlit as st
+from scripts.langchain_agent import create_sqlite_agent
+import altair as alt
+from scripts.charts import (
+    plot_anda_approvals_by_year,
+    plot_applicants_by_year,
+    plot_top_20_applicants_pie,
+    plot_top_20_applicants_pie_range
+)
+
 
 # --- 💬 Chatbot Section ---
 st.subheader("💬 Chat with the Data")
