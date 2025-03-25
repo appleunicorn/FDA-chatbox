@@ -6,8 +6,6 @@ from scripts.charts import (
     plot_top_20_applicants_pie,
     plot_top_20_applicants_pie_range
 )
-import os
-import sqlite3
 
 st.set_page_config(page_title="FDA chatbot", layout="wide")
 st.title("💬 FDA ANDA Approvals Chatbot")
@@ -37,33 +35,58 @@ This app helps users:
 - Generate dynamic visualizations on demand
 
 ---
-
-### 💡 **Try Asking Questions Like:**
-- *"What is the trend of ANDA approvals over the last 5 years?"*
-- *"Which company had the most first generics approved in 2023?"*
-- *"How many first Gx applicants were there in 2020?"*
-- *"Show a chart of number of approvals by year."*
-- *"Who were the top 20 generic applicants from 2020 to 2024?"*
-
----  
 """)
 
-# --- Q&A Section ---
+# --- 💡 Clickable Guiding Questions ---
+st.subheader("💡 Try asking one of these:")
+guiding_questions = [
+    "What is the trend of ANDA approvals over the last 5 years?",
+    "Which company had the most first generics approved in 2023?",
+    "How many first Gx applicants were there in 2020?",
+    "Show a chart of number of approvals by year.",
+    "Who were the top 20 generic applicants from 2020 to 2024?"
+]
+
+clicked_question = st.radio("Choose a question:", guiding_questions, index=None)
+
+# --- 💬 Chatbot Section ---
+st.markdown("---")
+st.subheader("💬 Chat with the Data")
+
 DB_PATH = "fda_first_generic_approvals.db"
 agent = create_sqlite_agent(db_path=DB_PATH)
 
-question = st.text_input("Ask a question about the FDA approval data:")
+# Store and manage chat question
+if "question" not in st.session_state:
+    st.session_state.question = ""
 
-if question:
-    with st.spinner("🤖 Thinking..."):
-        try:
-            response = agent.run(question)
-            st.markdown("### ✅ Answer")
-            st.write(response)
-        except Exception as e:
-            st.error(f"Error: {e}")
+if clicked_question:
+    st.session_state.question = clicked_question
 
-# --- Visual Chart Section (now in main area) ---
+with st.container():
+    st.markdown("**Ask anything about the FDA ANDA approval database.**")
+
+    question = st.text_input(
+        "Type your question below:",
+        value=st.session_state.question,
+        key="chat_input",
+        label_visibility="collapsed",
+        placeholder="e.g., Which company had the most first generics approved in 2023?"
+    )
+
+    if question != st.session_state.question:
+        st.session_state.question = question
+
+    if st.session_state.question:
+        with st.spinner("🤖 Thinking..."):
+            try:
+                response = agent.run(st.session_state.question)
+                st.markdown("### ✅ Answer")
+                st.write(response)
+            except Exception as e:
+                st.error(f"Error: {e}")
+
+# --- 📊 Visual Chart Section ---
 st.markdown("---")
 st.subheader("📊 Key Insights from Data")
 
@@ -97,7 +120,7 @@ elif chart_type == "Top 20 Applicants (Year Range)":
         df = plot_top_20_applicants_pie_range(start_year=start, end_year=end, db_path=DB_PATH, show=True)
         st.dataframe(df)
 
-# --- Contact Me Section (still at the bottom) ---
+# --- 📬 Contact Section ---
 st.markdown("---")
 st.subheader("📬 Contact Me")
 st.markdown("""
