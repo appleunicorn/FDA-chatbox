@@ -91,8 +91,8 @@ st.markdown("---")
 st.subheader("💡 Try asking:")
 st.markdown("""
 - *What is the trend of ANDA approvals over the last 5 years?*  
-- *Which company had the most first generics approved in 2023?*  
-- *How many first Gx applicants were there in 2020?*  
+- *Which company had the most approvals in 2023?*  
+- *How many applicants were there from 2018 to 2024 in each year?*  
 - *Who were the top 5 companies from 2020 to 2024?*  
 """)
 
