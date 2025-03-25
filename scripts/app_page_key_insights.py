@@ -5,7 +5,7 @@ from charts import (
     plot_top_20_applicants_pie_range
 )
 
-def app():
+def run():
     st.title("📊 Key Insights from FDA Gx Approvals")
     db_path = "fda_first_generic_approvals.db"
 
