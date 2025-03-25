@@ -13,7 +13,7 @@ st.title("🏠 Welcome to FDA First Generic Approvals Explorer")
 st.markdown("""
 This web app explores **first-time generic drug approvals** granted by the U.S. FDA.
 
-📅 The data comes directly from the [FDA website](https://www.fda.gov/drugs/drug-approvals-and-databases/first-generic-drug-approvals).
+📅 The data comes directly from the [FDA website](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals).
 
 💡 The goal is to help researchers, analysts, and curious minds interactively explore this important approval data.
 
