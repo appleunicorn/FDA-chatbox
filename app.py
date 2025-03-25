@@ -8,7 +8,7 @@ from scripts.charts import (
 )
 
 st.set_page_config(page_title="FDA chatbot", layout="wide")
-st.title("💬 FDA ANDA Approvals Chatbot")
+st.title("🤖 FDA ANDA Approvals Chatbot")
 
 # --- Landing Page Info ---
 st.markdown("""
