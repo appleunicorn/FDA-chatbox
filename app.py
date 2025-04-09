@@ -43,14 +43,17 @@ if "chat_log" not in st.session_state:
     st.session_state.chat_log = []
 
 
-# --- 📝 Question Input + Multi-Question Logic ---
+
+# --- 📝 Question Input  ---
 question = st.text_area(
     "Ask a question about the FDA approval data:",
     placeholder="e.g., Which company had the most approvals in 2023?",
     height=100
 )
 
-if question:
+submit_button = st.button("Ask")
+
+if submit_button and question:
     sub_questions = [q.strip() for q in question.split("?") if q.strip()]
     full_context = ""
     is_multi = len(sub_questions) > 1
@@ -62,7 +65,7 @@ if question:
         else:
             input_query = q_full
 
-        with st.spinner("🤖 Answering..."):
+        with st.spinner("Thinking..."):
             try:
                 response = st.session_state.agent.run(input_query)
 
