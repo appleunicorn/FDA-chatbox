@@ -11,8 +11,6 @@ from scripts.charts import (
 st.set_page_config(page_title="FDA chatbot", layout="wide")
 st.title("🤖 FDA ANDA Approvals Chatbot")
 
-
-
 # --- 🧬 Intro Section ---
 st.markdown("""
 Welcome to **FDA First Generic Approvals Chatbot** 🎉
@@ -22,10 +20,12 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 ---
 
 ### 🧬 About the Data
-- **Source:** [FDA First Generics](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
-- **Data:** ANDA number, drug names, company, approval date, and more
+- **Source:** [FDA First Generics public data](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
+- **Data fields:** ANDA number, drug names, company, approval date, and more
 - **Coverage:** Approvals from 2016 to present
-
+- **Model:** DeepSeek
+- **Note:** Approvals include approvals from acquired entities
+            
 ---
 """)
 
@@ -43,20 +43,10 @@ if "chat_log" not in st.session_state:
     st.session_state.chat_log = []
 
 
-# --- 🧹 Wipe Memory Button ---
-st.markdown("---")
-if st.button("🧹 Wipe Memory"):
-    if "memory" in st.session_state:
-        st.session_state.memory.clear()
-    if "chat_log" in st.session_state:
-        st.session_state.chat_log.clear()
-    st.success("Chat memory wiped. Start fresh!")
-
-
 # --- 📝 Question Input + Multi-Question Logic ---
 question = st.text_area(
     "Ask a question about the FDA approval data:",
-    placeholder="e.g., Who were the top applicants in the past 5 years? In the past 3 years? Compare them.",
+    placeholder="e.g., Which company had the most approvals in 2023?",
     height=100
 )
 
@@ -97,7 +87,6 @@ st.markdown("""
 - *Who were the top 5 companies from 2020 to 2024?*  
 """)
 
-
 # --- 🧠 Chat History Section ---
 st.markdown("---")
 st.subheader("🧠 Chat History")
@@ -105,16 +94,17 @@ st.subheader("🧠 Chat History")
 if st.session_state.get("chat_log"):
     chat_lines = []
     for role, msg in st.session_state.chat_log:
-        chat_lines.append(f"**{role}:** {msg}")
+        label = "🧑‍💻 <b>You:</b>" if role == "You" else "🤖 <b>Bot:</b>"
+        chat_lines.append(f"{label} {msg}")
 
-    chat_markdown = "<br>".join(chat_lines)  # use <br> instead of double newlines
+    chat_html = "<br><br>".join(chat_lines)
 
     st.markdown(
         f"""
-        <div style='height:300px; overflow-y:auto; padding:10px;
-                    background-color:#f9f9f9; border:1px solid #ccc;
-                    border-radius:5px; line-height: 1.3; font-size: 0.95rem;'>
-            {chat_markdown}
+        <div style='height:300px; overflow-y:auto; padding:12px;
+                    background-color:#fcfcfc; border:1px solid #ddd;
+                    border-radius:6px; line-height: 1.5; font-size: 0.95rem;'>
+            {chat_html}
         </div>
         """,
         unsafe_allow_html=True
@@ -122,6 +112,15 @@ if st.session_state.get("chat_log"):
 else:
     st.info("No conversation history yet.")
 
+
+# --- 🧹 Wipe Memory Button ---
+st.markdown("---")
+if st.button("🧹 Wipe Memory"):
+    if "memory" in st.session_state:
+        st.session_state.memory.clear()
+    if "chat_log" in st.session_state:
+        st.session_state.chat_log.clear()
+    st.success("Chat memory wiped. Start fresh!")
 
 
 # --- 📬 Contact Section ---
