@@ -117,7 +117,7 @@ else:
 
 # --- 🧹 Wipe Memory Button ---
 st.markdown("---")
-if st.button("🧹 Wipe Memory"):
+if st.button("🧹 Wipe chat memory"):
     if "memory" in st.session_state:
         st.session_state.memory.clear()
     if "chat_log" in st.session_state:
