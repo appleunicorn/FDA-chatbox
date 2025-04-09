@@ -24,9 +24,9 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 ### 🦠 About the Data
 - **Source:** [FDA First Generics public data](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
 - **Data fields:** ANDA number, drug names, applicant/company names, approval date, ANDA indication
-- **Coverage:** Approvals from 2016 to present
+- **Coverage:** Approvals from 2016 to present (2025 data not available on FDA website yet)
 - **Model:** DeepSeek
-- **Note:** Approvals include approvals from acquired entities
+- **Note:** Including approvals from acquired entities
             
 ---
 """)
