@@ -42,8 +42,6 @@ if "agent" not in st.session_state or "memory" not in st.session_state:
 if "chat_log" not in st.session_state:
     st.session_state.chat_log = []
 
-
-
 # --- 📝 Question Input  ---
 question = st.text_area(
     "Ask a question about the FDA approval data:",
@@ -94,6 +92,8 @@ st.markdown("""
 st.markdown("---")
 st.subheader("🧠 Chat History")
 
+chat_container = st.empty()
+
 if st.session_state.get("chat_log"):
     chat_lines = []
     for role, msg in st.session_state.chat_log:
@@ -102,7 +102,7 @@ if st.session_state.get("chat_log"):
 
     chat_html = "<br><br>".join(chat_lines)
 
-    st.markdown(
+    chat_container.markdown(
         f"""
         <div style='height:300px; overflow-y:auto; padding:12px;
                     background-color:#fcfcfc; border:1px solid #ddd;
@@ -113,8 +113,7 @@ if st.session_state.get("chat_log"):
         unsafe_allow_html=True
     )
 else:
-    st.info("No conversation history yet.")
-
+    chat_container.info("No conversation history yet.")
 
 # --- 🧹 Wipe Memory Button ---
 st.markdown("---")
@@ -123,8 +122,8 @@ if st.button("🧹 Wipe Memory"):
         st.session_state.memory.clear()
     if "chat_log" in st.session_state:
         st.session_state.chat_log.clear()
+    chat_container.info("No conversation history yet.")
     st.success("Chat memory wiped. Start fresh!")
-
 
 # --- 📬 Contact Section ---
 st.markdown("---")
