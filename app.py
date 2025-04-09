@@ -13,7 +13,7 @@ from scripts.charts import (
 st.set_page_config(page_title="FDA chatbot", layout="wide")
 st.title("🤖 FDA ANDA Approvals Chatbot")
 
-# --- 🧬 Intro Section ---
+# --- 🦠 Intro Section ---
 st.markdown("""
 Welcome to **FDA First Generic Approvals Chatbot** 🎉
 
@@ -21,7 +21,7 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 
 ---
 
-### 🧬 About the Data
+### 🦠 About the Data
 - **Source:** [FDA First Generics public data](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
 - **Data fields:** ANDA number, drug names, applicant/company names, approval date, ANDA indication
 - **Coverage:** Approvals from 2016 to present
@@ -45,13 +45,14 @@ if "chat_log" not in st.session_state:
     st.session_state.chat_log = []
 
 # --- 📝 Question Input  ---
-question = st.text_area(
-    "Ask a question about the FDA approval data:",
-    placeholder="e.g., Which company had the most approvals in 2023?",
-    height=100
-)
-
-submit_button = st.button("Ask")
+with st.form(key="chat_form", clear_on_submit=False):
+    question = st.text_area(
+        "Ask a question about the FDA approval data:",
+        placeholder="e.g., Which company had the most approvals in 2023?",
+        height=100,
+        key="question_input"
+    )
+    submit_button = st.form_submit_button("Ask")
 
 if submit_button and question:
     sub_questions = [q.strip() for q in question.split("?") if q.strip()]
