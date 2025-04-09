@@ -26,7 +26,7 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 - **Data fields:** ANDA number, drug names, applicant/company names, approval date, ANDA indication
 - **Coverage:** Approvals from 2016 to present
 - **Model:** DeepSeek
-- **Note:** Approvals include approvals from acquired entities
+- **Note:** Including approvals from acquired entities
             
 ---
 """)
