@@ -21,7 +21,7 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 
 ---
 
-### 🐞 About the Data
+### 🐞 About the data
 - **Source:** [FDA First Generics public data](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
 - **Data fields:** ANDA number, drug names, applicant/company names, approval date, ANDA indication
 - **Coverage:** Approvals from 2016 to present ( 2025 data not available on FDA website yet )
@@ -32,7 +32,7 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 """)
 
 # --- 🤖 Chatbot Setup ---
-st.subheader("💬 Chat with the Data")
+st.subheader("💬 Chat with the data")
 
 DB_PATH = "fda_first_generic_approvals.db"
 
@@ -81,7 +81,7 @@ if submit_button and question:
             except Exception as e:
                 st.error(f"Error: {e}")
 
-# --- 💡 Sample Questions ---
+# --- 💡 Sample questions ---
 st.markdown("---")
 st.subheader("💡 Try asking:")
 st.markdown("""
@@ -93,7 +93,7 @@ st.markdown("""
 
 # --- 🧠 Chat History Section ---
 st.markdown("---")
-st.subheader("🧠 Chat History")
+st.subheader("🧠 Chat history")
 
 chat_container = st.empty()
 
@@ -120,7 +120,7 @@ else:
 
 # --- 🧹 Wipe Memory Button ---
 st.markdown("---")
-if st.button("🧹 Wipe chat memory"):
+if st.button("🧹 Reset chat memory"):
     if "memory" in st.session_state:
         st.session_state.memory.clear()
     if "chat_log" in st.session_state:
