@@ -28,7 +28,9 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 - **LLM model:** DeepSeek
 - **Why is 1st Gx data important:** The very first Gx applicants who obtain approvals for a drug will enjoy 180-day market exclusivity, which means higher margin and early market capture         
 - **Note:** Cleaned up data includes approvals from acquired entities
-            
+- **Last chatbot update:** April 11, 2025
+
+                        
 ---
 """)
 
