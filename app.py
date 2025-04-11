@@ -17,15 +17,16 @@ st.title("🤖 FDA ANDA Approvals Chatbot")
 st.markdown("""
 Welcome to **FDA First Generic Approvals Chatbot** 🎉
 
-This app helps you explore trends, companies, and insights in FDA first-time generic drug approvals using a conversational AI and interactive analysis.
+This app helps you explore trends, companies, and insights in FDA first-time generic drug approvals using a conversational AI and interactive analysis
 
 ---
 
 ### 🐞 About the data
 - **Source:** [FDA First Generics public data](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
 - **Data fields:** ANDA number, drug names, applicant/company names, approval date, ANDA indication
-- **Coverage:** Approvals from 2016 to present ( 2025 data not available on FDA website yet )
-- **Model:** DeepSeek
+- **Coverage:** Approvals from 2016 to present (the most recent FDA data reflects September 2024 approvals)
+- **LLM model:** DeepSeek
+- **Why is First Generics data important:** The very first applicants who obtain approvals will enjoy 180-day market exclusivity, which means higher margin and early market capture         
 - **Note:** Cleaned up data includes approvals from acquired entities
             
 ---
