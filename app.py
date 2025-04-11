@@ -24,10 +24,10 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 ### 🐞 About the data
 - **Source:** [FDA First Generics public data](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
 - **Data fields:** ANDA number, drug names, applicant/company names, approval date, ANDA indication
-- **Coverage:** Approvals from 2016 to present (the most recent FDA data reflects September 2024 approvals)
+- **Coverage:** Approvals from 2016 to present (latest FDA update reflects September 2024 approvals)
 - **LLM model:** DeepSeek
-- **Why is 1st Gx data important:** The very first Gx applicants who obtain approvals for a drug will enjoy 180-day market exclusivity, which means higher margin and early market capture         
-- **Note:** Cleaned up data includes approvals from acquired entities
+- **Why 1st Gx data matters:** The first Gx applicants securing approval for a drug receive 180-day market exclusivity, enabling higher profit margins and early market capture         
+- **Note:** Data includes approvals from acquired entities (cleaned and consolidated)
 - **Last chatbot update:** April 11, 2025
 
                         
