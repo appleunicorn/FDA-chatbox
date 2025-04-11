@@ -18,7 +18,10 @@ st.markdown("""
 Welcome to **FDA First Generic Approvals Chatbot** 🎉
 
 This app helps you explore trends, companies, and insights in FDA first-time generic drug (1st Gx) approvals using a conversational AI and interactive analysis
+            
+**Why 1st Gx data matters:** The first Gx applicants to receive an ANDA approval challenging a patent is eligible for 180-day exclusivity, enabling premium pricing and early market capture         
 
+            
 ---
 
 ### 🐞 About the data
@@ -26,7 +29,6 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 - **Data fields:** ANDA number, drug names, applicant/company names, approval date, ANDA indication
 - **Coverage:** Approvals from 2016 to present (latest FDA update reflects September 2024 approvals)
 - **LLM model:** DeepSeek
-- **Why 1st Gx data matters:** The first Gx applicants to receive an ANDA approval challenging a patent is eligible for 180-day exclusivity, enabling premium pricing and early market capture         
 - **Note:** Data includes approvals from acquired entities (cleaned and consolidated)
 - **Last chatbot update:** April 11, 2025
 
