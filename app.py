@@ -22,7 +22,7 @@ This app helps you explore trends, companies, and insights in FDA first-time gen
 ---
 
 ### 🐞 About the data
-- **Source:** [FDA First Generics public data](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
+- **Source:** [FDA First Generics (1st Gx) public data](https://www.fda.gov/drugs/drug-and-biologic-approval-and-ind-activity-reports/first-generic-drug-approvals)
 - **Data fields:** ANDA number, drug names, applicant/company names, approval date, ANDA indication
 - **Coverage:** Approvals from 2016 to present (latest FDA update reflects September 2024 approvals)
 - **LLM model:** DeepSeek
